@@ -55,12 +55,12 @@ def perform_analysis(data):
         "Ventricular Tachycardia": 0
     }
 
-    if average_rate > 0.5:
+    if average_rate > 0.3:
         # High likelihood of Ventricular Tachycardia
         conditions["Ventricular Tachycardia"] = 70
         conditions["Atrial Fibrillation"] = 20
         conditions["Normal Sinus Rhythm"] = 10
-    elif average_rate < -0.2:
+    elif average_rate < 0.1:
         # Higher likelihood of Atrial Fibrillation
         conditions["Atrial Fibrillation"] = 60
         conditions["Normal Sinus Rhythm"] = 30
