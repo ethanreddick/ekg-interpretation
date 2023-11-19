@@ -1,3 +1,59 @@
 .custom-margin {
     margin-right: 10px; /* Adjust the value as needed */
 }
+
+.hamburger-line {
+    width: 40px; /* Increase width */
+    height: 4px; /* Increase height */
+    margin: 8px 0; /* Increase space between lines */
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+/* Menu slide-out width */
+.menu-open #menu {
+    width: 250px;
+}
+
+/* Main content slide */
+.menu-open #main-content {
+    margin-left: 250px;
+}
+
+#hamburger {
+    z-index: 1000; /* or a sufficiently high value */
+}
+
+#menu {
+    top: 0;
+    height: 100vh;
+    transition: width 0.3s ease;
+    padding-top: 70px;
+}
+
+/* Menu slide-out width */
+.menu-open #menu {
+    width: 250px; /* Adjust as needed */
+}
+
+.mt-6 {
+    margin-top: 0px;
+}
+
+#main-content {
+    padding-top: 20px;
+}
+
+.text-center {
+    padding-top: 20px;
+}
+
+#patientInfo {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#menu a {
+    margin-left: 0px;
+    font-size: 30px;
+}

@@ -10,41 +10,59 @@
 </head>
 
 <body class="bg-gray-200">
-    
-    <div class="text-center">
-        <h1 class="text-4xl font-bold text-black mt-6">EKG Interpretation App</h1>
-        <div class="text-center mt-6">
-            <label class="inline-block cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                <span>Import EKG Data (.CSV)</span>
-                <input type="file" class="hidden" accept=".csv" onchange="handleFileSelect(event)">
-            </label>
-            <div id="patientInfo" class="max-w-lg mx-auto mt-6 hidden">
-                <p id="patientName" class="text-lg font-bold"></p>
-                <p id="patientAge" class="text-lg"></p>
-            </div>            
-            <div id="chartContainer" class="max-w-lg mx-auto mt-6 hidden">
-                <canvas id="ecgChart"></canvas>
-            </div>
+
+    <div class="relative">
+        <!-- Hamburger Button -->
+        <div id="hamburger" class="absolute top-0 left-0 m-4">
+            <div class="hamburger-line bg-black"></div>
+            <div class="hamburger-line bg-black"></div>
+            <div class="hamburger-line bg-black"></div>
         </div>
-        <div class="mt-10">
-            <!-- Likely Heart Conditions Section -->
-            <div id="analysisSection" class="hidden">
-                <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="p-8">
-                        <h2 class="block text-lg leading-tight font-medium text-black">Analysis</h2>
-                        <div class="flex justify-between mt-4 text-gray-500">
-                            <span class="font-semibold" style="width: 50%;">Condition</span>
-                            <span class="font-semibold" style="width: 50%; text-align: right;">Confidence</span>
-                        </div>
-                        <div id="conditionsList" class="mt-2 hidden">
-                            <!-- Condition elements will be added here dynamically -->
-                        </div>
+    
+        <!-- Slide-out Menu -->
+        <div id="menu" class="absolute top-0 left-0 h-full w-0 bg-gray-100 overflow-hidden">
+            <a href="#" class="block p-4 text-black hover:bg-gray-300" onclick="loadContent('about')">About</a>
+            <a href="#" class="block p-4 text-black hover:bg-gray-300" onclick="loadContent('demo')">Demo</a>
+        </div>
+    
+        <!-- Main Content Area -->
+        <div id="main-content" class="ml-0 transition-all">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-black mt-6">EKG Interpretation App</h1>
+                <div class="text-center mt-6">
+                    <label class="inline-block cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <span>Import EKG Data (.CSV)</span>
+                        <input type="file" class="hidden" accept=".csv" onchange="handleFileSelect(event)">
+                    </label>
+                    <div id="patientInfo" class="max-w-lg mx-auto mt-6 hidden">
+                        <p id="patientName" class="text-lg font-bold"></p>
+                        <p id="patientAge" class="text-lg"></p>
+                    </div>            
+                    <div id="chartContainer" class="max-w-lg mx-auto mt-6 hidden">
+                        <canvas id="ecgChart"></canvas>
                     </div>
                 </div>
-            </div>
-            <!-- Additional Information Section -->
-            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden mt-4 hover:shadow-lg transition duration-300 hover:bg-gray-100">
-                <div id="stabilityChange" class="p-6 text-lg hidden"></div>
+                <div class="mt-10">
+                    <!-- Likely Heart Conditions Section -->
+                    <div id="analysisSection" class="hidden">
+                        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                            <div class="p-8">
+                                <h2 class="block text-lg leading-tight font-medium text-black">Analysis</h2>
+                                <div class="flex justify-between mt-4 text-gray-500">
+                                    <span class="font-semibold" style="width: 50%;">Condition</span>
+                                    <span class="font-semibold" style="width: 50%; text-align: right;">Confidence</span>
+                                </div>
+                                <div id="conditionsList" class="mt-2 hidden">
+                                    <!-- Condition elements will be added here dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional Information Section -->
+                    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden mt-4 hover:shadow-lg transition duration-300 hover:bg-gray-100">
+                        <div id="stabilityChange" class="p-6 text-lg hidden"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -203,9 +221,27 @@
 
             document.getElementById('analysisSection').classList.remove('hidden');
         }
-
         conditionNameSpan.className = 'text-md font-semibold custom-margin';
 
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle the menu
+            document.getElementById('hamburger').addEventListener('click', function() {
+                document.body.classList.toggle('menu-open');
+            });
+
+            // Function to load content into the main area
+            window.loadContent = function(section) {
+                var content = document.getElementById('main-content');
+                if (section === 'about') {
+                    content.innerHTML = '<h2>About</h2><p>Some about text here...</p>';
+                } else if (section === 'demo') {
+                    content.innerHTML = '<h2>Demo</h2><iframe src="your_video_url" frameborder="0" allowfullscreen></iframe>';
+                }
+            };
+        });
     </script>
 
 </body>
