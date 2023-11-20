@@ -23,6 +23,11 @@
         <div id="menu" class="absolute top-0 left-0 h-full w-0 bg-gray-100 overflow-hidden">
             <a href="#" class="block p-4 text-black hover:bg-gray-300" onclick="loadContent('about')">About</a>
             <a href="#" class="block p-4 text-black hover:bg-gray-300" onclick="loadContent('demo')">Demo</a>
+            <!-- Container for the About content -->
+            <div id="about-content" class="hidden">
+                <!-- About information goes here -->
+            </div>
+
         </div>
     
         <!-- Main Content Area -->
@@ -226,22 +231,45 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Toggle the menu
-            document.getElementById('hamburger').addEventListener('click', function() {
-                document.body.classList.toggle('menu-open');
-            });
+        document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('hamburger').addEventListener('click', function () {
+                    var body = document.body;
+                    var menu = document.getElementById('menu');
+                    var aboutContent = document.getElementById('about-content');
+
+                    // Toggle the menu-open class to open/close the menu
+                    body.classList.toggle('menu-open');
+
+                    if (body.classList.contains('menu-open')) {
+                        // Opening the menu
+                        menu.style.width = '250px'; // Reset menu width to initial state
+                    } else {
+                        // Closing the menu
+                        menu.style.width = '0'; // Collapse the menu
+                        aboutContent.style.width = '0'; // Hide about content
+                        aboutContent.classList.add('hidden');
+                    }
+                });
 
             // Function to load content into the main area
-            window.loadContent = function(section) {
-                var content = document.getElementById('main-content');
+            window.loadContent = function (section) {
+                var body = document.body;
+                var menu = document.getElementById('menu');
+                var aboutContent = document.getElementById('about-content');
+                var mainContent = document.getElementById('main-content');
+
                 if (section === 'about') {
-                    content.innerHTML = '<h2>About</h2><p>Some about text here...</p>';
+                    body.classList.add('menu-open');
+                    aboutContent.classList.remove('hidden');
+                    aboutContent.innerHTML = '<h2>About</h2><p>Some about text here...</p>';
+                    menu.style.width = '700px'; // Expanded width
+                    aboutContent.style.width = '450px'; // About content width
                 } else if (section === 'demo') {
-                    content.innerHTML = '<h2>Demo</h2><iframe src="your_video_url" frameborder="0" allowfullscreen></iframe>';
+                    mainContent.innerHTML = '<h2>Demo</h2><iframe src="your_video_url" frameborder="0" allowfullscreen></iframe>';
                 }
             };
         });
+
     </script>
 
 </body>

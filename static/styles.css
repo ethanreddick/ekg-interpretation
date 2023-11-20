@@ -57,3 +57,24 @@
     margin-left: 0px;
     font-size: 30px;
 }
+
+#about-content {
+    background-color: transparent;
+    width: 0; /* Start with no width */
+    overflow: hidden;
+    padding-left: 30px;
+}
+
+/* Hide the about content by default */
+.hidden {
+    display: none;
+}
+
+.expanded {
+    width: 500px; /* Adjust based on how wide you want it to be */
+}
+
+.slide-out-menu {
+    width: 250px; /* Initial width */
+    /* Other styling as needed */
+}
