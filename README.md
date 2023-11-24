@@ -18,7 +18,3 @@ Next, run 'flask --app app run'
 
 Each row in the patient csv files corresponds to an EKG reading. The first row is the
 most recent reading and the third row represents that patient's previous reading.
-
-TODO:
-    - Handle edge case in which patient is visiting for the first time, and display
-    "Patient's first EKG reading on record" in the "stability change" section.
