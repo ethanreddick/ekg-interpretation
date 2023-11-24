@@ -210,20 +210,27 @@
 
         function displayStabilityChange(stabilityChange, date) {
             const stabilityChangeElement = document.getElementById('stabilityChange');
-            stabilityChangeElement.innerHTML = `Stability change since <strong>${date}</strong>: `;
-
-            const changeDescription = document.createElement('span');
-            changeDescription.textContent = stabilityChange > 0 ? 'Improved' : 'Declined';
-            changeDescription.style.color = stabilityChange > 0 ? 'green' : 'red';
             
-            const changePercentage = document.createElement('span');
-            changePercentage.textContent = ` ${Math.abs(stabilityChange).toFixed(2)}%`;
-            changePercentage.className = 'font-bold';
+            // Clear any existing content
+            stabilityChangeElement.innerHTML = '';
 
-            stabilityChangeElement.appendChild(changeDescription);
-            stabilityChangeElement.appendChild(changePercentage);
-            stabilityChangeElement.classList.remove('hidden');
+            if (date.toLowerCase() === 'none') {
+                stabilityChangeElement.textContent = "This is the patient's first EKG on record";
+            } else {
+                stabilityChangeElement.innerHTML = `Stability change since <strong>${date}</strong>: `;
 
+                const changeDescription = document.createElement('span');
+                changeDescription.textContent = stabilityChange > 0 ? 'Improved' : 'Declined';
+                changeDescription.style.color = stabilityChange > 0 ? 'green' : 'red';
+                
+                const changePercentage = document.createElement('span');
+                changePercentage.textContent = ` ${Math.abs(stabilityChange).toFixed(2)}%`;
+                changePercentage.className = 'font-bold';
+
+                stabilityChangeElement.appendChild(changeDescription);
+                stabilityChangeElement.appendChild(changePercentage);
+                stabilityChangeElement.classList.remove('hidden');
+            }
             document.getElementById('analysisSection').classList.remove('hidden');
         }
         conditionNameSpan.className = 'text-md font-semibold custom-margin';
@@ -260,13 +267,13 @@
                     if (section === 'about') {
                         body.classList.add('menu-open');
                         aboutContent.classList.remove('hidden');
-                        aboutContent.innerHTML = '<h2><strong> About our EKG Interpreter Web App</strong></h2><p>Our solution is a web app that ingests the data from an EKG and displays statistical analysis in an intuitive manner to lower the misdiagnosis rate by nurses. For technology we will making a basic web app and using Python for the backend. We will use CSV data to represent the data being piped in from the EKG machine. As for competing technologies there was only one similar project able to be found and its reviews were abysmal. We are not re-inventing the wheel and a working tool that works in this way would certainly be useful for nurses and hospitals to lower liability.</p>';
+                        aboutContent.innerHTML = '<h2><strong> About our EKG Interpreter Web App</strong></h2><p>Our solution is a web app that ingests data from an EKG machine and displays statistical analysis in an intuitive manner to lower the misdiagnosis rate by nurses. We used Python and Flask for the backend and Javascript and TailwindCSS for the frontend. We used patient CSV files to represent the data being piped in from the EKG machine. As for competing technologies there was only one similar project able to be found and its reviews were abysmal. We are not re-inventing the wheel and a working tool like this would certainly be useful for nurses and hospitals to potentially lower liability and increase nurse confidence.</p>';
                         menu.style.width = '700px'; // Expanded width for About section
                         aboutContent.style.width = '650px'; // About content width
                     } else if (section === 'demo') {
                         body.classList.add('menu-open');
                         aboutContent.classList.remove('hidden');
-                        aboutContent.innerHTML = '<h2><strong>Demo</strong></h2><iframe src="video_url" frameborder="0" allowfullscreen style="width:100%; height: 400px;"></iframe>'; // Update the 'src' with your actual video URL
+                        aboutContent.innerHTML = '<h2><strong>Demo</strong></h2><video controls style="width:100%; height: 400px;"><source src="./static/videos/Demo_V1.mp4" type="video/mp4">Your browser does not support the video tag.</video>';
                         menu.style.width = '700px'; // Expanded width for Demo section
                         aboutContent.style.width = '650px'; // Demo content width
                     }
